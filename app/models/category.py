@@ -1,17 +1,22 @@
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
+from typing import TYPE_CHECKING
+
+from sqlalchemy import String
+from sqlalchemy.orm import relationship, Mapped, mapped_column
 
 from app.database import Base
 
+if TYPE_CHECKING:
+    from .product import Product
+
 
 class Category(Base):
-    __tablename__ = 'categories'
+    __tablename__ = "categories"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, nullable=False, index=True)
-    slug = Column(String, unique=True, nullable=False, index=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+    slug: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
 
-    products = relationship('Product', back_populates='category')
+    products: Mapped[list[Product]] = relationship(back_populates="category")
 
     def __repr__(self):
         return f'<Category(id={self.id}, name="{self.name}")>'

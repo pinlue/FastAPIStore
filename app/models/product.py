@@ -22,7 +22,7 @@ class Product(Base):
     image_url: Mapped[Optional[str]] = mapped_column()
 
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), nullable=False)
-    category: Mapped[Category] = relationship(back_populates="products")
+    category: Mapped['Category'] = relationship(back_populates="products")
 
     def __repr__(self):
         return f'<Product(id={self.id}, name="{self.name}"'

@@ -16,7 +16,7 @@ class Category(Base):
     name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
     slug: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
 
-    products: Mapped[list[Product]] = relationship(back_populates="category")
+    products: Mapped[list['Product']] = relationship(back_populates="category")
 
     def __repr__(self):
         return f'<Category(id={self.id}, name="{self.name}")>'

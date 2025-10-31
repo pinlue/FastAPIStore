@@ -25,3 +25,12 @@ class CartResponse(BaseModel):
     items: list[CartItemResponse] = Field(..., description='List of cart items')
     total: float = Field(..., description='Total cart price')
     items_count: int = Field(..., gt=0, description='Total number of cart items')
+#ToDo
+class AddToCartRequest(CartItemBase):
+    cart: dict[int, int] = {}
+
+class UpdateCartRequest(CartItemBase):
+    cart: dict[int, int] = {}
+
+class RemoveFromCartRequest(BaseModel):
+    cart: dict[int, int] = {}
